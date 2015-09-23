@@ -11,7 +11,7 @@ class RestProvider {
     this.configure = cfg => Object.assign(this.config, cfg);
   }
 
-  $get($q, logger, $injector) {
+  $get($q, $log, $injector) {
     let config = this.config;
     let rest = $injector.get(config.service);
 
@@ -42,10 +42,11 @@ class RestProvider {
 
       rest[verb](args)
       .then(function(res) {
+        $log.debug('[API ' + verb.toUpperCase() + ' Success]:', 'endpoint: ' + uri, res.data);
         defer.resolve(res.data);
       })
-      .catch(function() {
-        logger.error('endpoint: ' + uri, null, '[API ' + verb.toUpperCase() + ' Error]');
+      .catch(function(res) {
+        $log.debug('[API ' + verb.toUpperCase() + ' Error]:', 'endpoint: ' + uri, res);
         defer.reject();
       });
 

@@ -32,7 +32,7 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel?optional[]=runtime&stage=0',
-        include: /(angular-sanji-window)|(sanji-logger-ui)/
+        include: /(angular-sanji-window)/
       },
       {
         test: /\.html$/,

@@ -67,7 +67,6 @@
     "toastr": "^2.1.2"
   },
   "dependencies": {
-    "angular": "~1.4.6",
-    "sanji-logger-ui": "~1.0.6"
+    "angular": "~1.4.6"
   }
 }
