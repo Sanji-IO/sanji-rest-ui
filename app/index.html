@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>sanji-rest-ui config ui</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
+</head>
+
+<body ng-app="webapp">
+  <!--[if lt IE 8]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <div class="container">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>sanji-rest-ui config ui</h3>
+      </div>
+    </md-toolbar>
+
+    <div layout="row" layout-padding layout-align="center center">
+      <div flex="33">
+        <sanji-window window-name="Ethernet">
+          <sanji-window-state default-state state-name="sanji-info"
+          link-name="Information" icon="">
+            <div ng-controller="EthernetController as vm">
+              <md-content>
+                <small class="md-subheader">IP</small>
+                <h2 ng-bind="::vm.ethernet.ip"></h2>
+                <br/>
+                <small class="md-subheader">Netmask</small>
+                <h2 ng-bind="::vm.ethernet.netmask"></h2>
+                <br/>
+                <small class="md-subheader">Gateway</small>
+                <h2 ng-bind="::vm.ethernet.gateway"></h2>
+              </md-content>
+            </div>
+          </sanji-window-state>
+        </sanji-window>
+      </div>
+    </div>
+
+    <div layout="row" layout-align="center center">
+      <span class="md-caption">from the Sanji Team</span>
+    </div>
+  </div>
+
+</body>
+
+</html>
