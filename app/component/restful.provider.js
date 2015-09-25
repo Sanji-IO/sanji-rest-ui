@@ -42,12 +42,12 @@ class RestProvider {
 
       rest[verb](args)
       .then(function(res) {
-        $log.debug('[API ' + verb.toUpperCase() + ' Success]:', 'endpoint: ' + uri, res.data);
-        defer.resolve(res.data);
+        $log.debug('[API ' + verb.toUpperCase() + ' Success]:', 'endpoint: ' + uri, res);
+        defer.resolve(res);
       })
       .catch(function(res) {
         $log.debug('[API ' + verb.toUpperCase() + ' Error]:', 'endpoint: ' + uri, res);
-        defer.reject();
+        defer.reject(res);
       });
 
       return defer.promise;
