@@ -5,7 +5,7 @@ class RestProvider {
 
     this.config = {
       service: 'http',
-      basePath: '/api/v1'
+      basePath: ''
     };
 
     this.configure = cfg => Object.assign(this.config, cfg);
