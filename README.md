@@ -49,6 +49,26 @@ let app = angular.module('webapp', ['sanji.rest'])
 ```
 and then use `rest` as DI service.
 ```javascript
+class AppController {
+  constructor(rest) {
+    rest.get('/users/me')
+    .then(data => {
+      console.log(data);
+    })
+    .catch(data => {
+      console.log(data);
+    });
+
+    rest.post('/login', { username: 'admin', password: 'xxxxx' })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(data => {
+      console.log(data);
+    });
+  }
+}
+AppController.$inject = ['rest'];
 ```
 
 ## Contact
