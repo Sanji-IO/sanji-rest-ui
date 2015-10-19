@@ -1,8 +1,10 @@
+import ngFileUpload from 'ng-file-upload';
+
 import RestProvider from './restful.provider' ;
 import HttpService from './http.service' ;
 
 let sandbox;
-let $q, $log, $http, $injector, $timeout;
+let $q, $log, $http, $injector, $timeout, Upload;
 let restProvider;
 let http;
 
@@ -11,13 +13,16 @@ describe('Provider: rest', () => {
     sandbox = sinon.sandbox.create();
   });
 
+  beforeEach(angular.mock.module(ngFileUpload));
+
   beforeEach(() => {
-    angular.mock.inject((_$q_, _$log_, _$injector_, _$http_, _$timeout_) => {
+    angular.mock.inject((_$q_, _$log_, _$injector_, _$http_, _$timeout_, _Upload_) => {
       $q = _$q_;
       $log = _$log_;
       $injector = _$injector_;
       $http = _$http_;
       $timeout = _$timeout_;
+      Upload = _Upload_;
     });
   });
 
@@ -42,7 +47,7 @@ describe('Provider: rest', () => {
   it('#$get(<...injects>) should return rest service instance', () => {
     let obj;
     sandbox.stub($injector, 'get').returns(http);
-    obj = restProvider.$get($q, $log, $injector);
+    obj = restProvider.$get($q, $log, $injector, Upload);
     expect(obj.get).to.be.a('function');
     expect(obj.put).to.be.a('function');
     expect(obj.post).to.be.a('function');
@@ -55,7 +60,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'get').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.get('/test')
         .then(data => {
           expect(data).to.equal(fakeData);
@@ -71,7 +76,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'get').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.get('/test')
         .catch(data => {
           expect(data).to.equal(fakeData);
@@ -87,7 +92,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'post').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.post('/test', fakeData)
         .then(data => {
           expect(data).to.equal(fakeData);
@@ -103,7 +108,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'post').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.post('/test', fakeData)
         .catch(data => {
           expect(data).to.equal(fakeData);
@@ -135,7 +140,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'put').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.put('/test', fakeData)
         .catch(data => {
           expect(data).to.equal(fakeData);
@@ -151,7 +156,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'delete').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.delete('/test', fakeData)
         .then(data => {
           expect(data).to.equal(fakeData);
@@ -167,7 +172,7 @@ describe('Provider: rest', () => {
       let fakeData = { key: 'value' };
       sandbox.stub(http, 'delete').returns(deferred.promise);
       sandbox.stub($injector, 'get').returns(http);
-      obj = restProvider.$get($q, $log, $injector);
+      obj = restProvider.$get($q, $log, $injector, Upload);
       obj.delete('/test', fakeData)
         .catch(data => {
           expect(data).to.equal(fakeData);

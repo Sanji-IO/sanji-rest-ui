@@ -11,23 +11,43 @@ class RestProvider {
     this.configure = cfg => Object.assign(this.config, cfg);
   }
 
-  $get($q, $log, $injector) {
+  $get($q, $log, $injector, Upload) {
     let config = this.config;
     let rest = $injector.get(config.service);
 
     return {
-      get: function(uri) {
-        return makeRequest('get', uri);
+      get: uri => makeRequest('get', uri),
+      post: (uri, data, files) => {
+        if ('http' === config.service && Array.isArray(files)) {
+          return Upload.upload({
+            url: config.basePath + uri,
+            method: 'POST',
+            data: {
+              files: files,
+              otherInfo: data
+            }
+          });
+        }
+        else {
+          return makeRequest('post', uri, data);
+        }
       },
-      post: function(uri, data) {
-        return makeRequest('post', uri, data);
+      put: (uri, data, files) => {
+        if ('http' === config.service && Array.isArray(files)) {
+          return Upload.upload({
+            url: config.basePath + uri,
+            method: 'PUT',
+            data: {
+              files: files,
+              otherInfo: data
+            }
+          });
+        }
+        else {
+          return makeRequest('put', uri, data);
+        }
       },
-      put: function(uri, data) {
-        return makeRequest('put', uri, data);
-      },
-      delete: function(uri) {
-        return makeRequest('delete', uri);
-      }
+      delete: uri => makeRequest('delete', uri)
     };
 
     function makeRequest(verb, uri, data) {

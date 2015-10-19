@@ -34,6 +34,7 @@ others, default is http.
 
 ## Dependencies
 - [angularjs](https://github.com/angular/angular.js)
+- [ng-file-upload](https://github.com/danialfarid/ng-file-upload)
 
 ## Installation
 Sanji rest service is based on es6 + webpack to development and embrace npm to install it.
