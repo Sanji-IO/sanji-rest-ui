@@ -17,11 +17,14 @@ class RestProvider {
 
     return {
       configure: cfg => Object.assign(config, cfg),
-      get: uri => makeRequest('get', uri),
-      post: (uri, data, files) => {
+      get: (uri, basePath) => {
+        return makeRequest('get', uri, null, basePath);
+      },
+      post: (uri, data, files, basePath) => {
         if ('http' === config.service && Array.isArray(files)) {
+          let base = basePath || config.basePath;
           return Upload.upload({
-            url: config.basePath + uri,
+            url: base + uri,
             method: 'POST',
             data: {
               files: files,
@@ -30,13 +33,14 @@ class RestProvider {
           });
         }
         else {
-          return makeRequest('post', uri, data);
+          return makeRequest('post', uri, data, basePath);
         }
       },
-      put: (uri, data, files) => {
+      put: (uri, data, files, basePath) => {
         if ('http' === config.service && Array.isArray(files)) {
+          let base = basePath || config.basePath;
           return Upload.upload({
-            url: config.basePath + uri,
+            url: base + uri,
             method: 'PUT',
             data: {
               files: files,
@@ -45,18 +49,21 @@ class RestProvider {
           });
         }
         else {
-          return makeRequest('put', uri, data);
+          return makeRequest('put', uri, data, basePath);
         }
       },
-      delete: uri => makeRequest('delete', uri)
+      delete: (uri, basePath) => {
+        return makeRequest('delete', uri, null, basePath);
+      }
     };
 
-    function makeRequest(verb, uri, data) {
+    function makeRequest(verb, uri, data, basePath) {
       let defer = $q.defer();
+      let base = basePath || config.basePath;
       verb = verb.toLowerCase();
 
       //start with the uri
-      let args = [config.basePath + uri];
+      let args = [base + uri];
       if (verb.match(/post|put|delete/)) {
         args.push(data);
       }
