@@ -16,6 +16,7 @@ class RestProvider {
     let rest = $injector.get(config.service);
 
     return {
+      configure: cfg => Object.assign(this.config, cfg),
       get: uri => makeRequest('get', uri),
       post: (uri, data, files) => {
         if ('http' === config.service && Array.isArray(files)) {
