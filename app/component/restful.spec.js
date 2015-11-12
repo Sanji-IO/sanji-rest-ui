@@ -55,6 +55,16 @@ describe('Provider: rest', () => {
   });
 
   describe('Service: rest', () => {
+    it('#configure(<config>) should extend config', () => {
+      let obj;
+      sandbox.stub($injector, 'get').returns(http);
+      obj = restProvider.$get($q, $log, $injector, Upload);
+      let config = {
+        basePath: '/api/v1'
+      };
+      expect(obj.configure(config)).to.eql({service: 'http', basePath: '/api/v1'});
+    });
+
     it('#get(<url>) should return success fake data', (done) => {
       let obj, deferred = $q.defer();
       let fakeData = { key: 'value' };
