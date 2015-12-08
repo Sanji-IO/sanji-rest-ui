@@ -7,7 +7,11 @@ import component from './component';
 class EthernetController {
   constructor(...injects) {
     EthernetController.$inject.forEach((item, index) => this[item] = injects[index]);
-    this.rest.get('/network/ethernets/1')
+    this.rest.get('/network/ethernets/1', {
+      params: {
+        hello: 'world'
+      }
+    })
       .then(res => {
         this.ethernet = {
           ip: res.data.ip,

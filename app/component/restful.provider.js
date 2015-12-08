@@ -17,12 +17,13 @@ class RestProvider {
 
     return {
       configure: cfg => Object.assign(config, cfg),
-      get: (uri, basePath) => {
-        return makeRequest('get', uri, null, basePath);
+      get: (uri, options) => {
+        return makeRequest('get', uri, null, options);
       },
-      post: (uri, data, files, basePath) => {
+      post: (uri, data, files, options) => {
         if ('http' === config.service && Array.isArray(files)) {
-          let base = basePath || config.basePath;
+          options = options || {};
+          let base = options.basePath || config.basePath;
           return Upload.upload({
             url: base + uri,
             method: 'POST',
@@ -36,9 +37,10 @@ class RestProvider {
           return makeRequest('post', uri, data, basePath);
         }
       },
-      put: (uri, data, files, basePath) => {
+      put: (uri, data, files, options) => {
         if ('http' === config.service && Array.isArray(files)) {
-          let base = basePath || config.basePath;
+          options = options || {};
+          let base = options.basePath || config.basePath;
           return Upload.upload({
             url: base + uri,
             method: 'PUT',
@@ -49,17 +51,19 @@ class RestProvider {
           });
         }
         else {
-          return makeRequest('put', uri, data, basePath);
+          return makeRequest('put', uri, data, options);
         }
       },
-      delete: (uri, basePath) => {
-        return makeRequest('delete', uri, null, basePath);
+      delete: (uri, options) => {
+        return makeRequest('delete', uri, null, options);
       }
     };
 
-    function makeRequest(verb, uri, data, basePath) {
+    function makeRequest(verb, uri, data, options) {
       let defer = $q.defer();
-      let base = basePath || config.basePath;
+      options = options || {};
+      let base = options.basePath || config.basePath;
+      let params = options.params || {};
       verb = verb.toLowerCase();
 
       //start with the uri
@@ -67,6 +71,7 @@ class RestProvider {
       if (verb.match(/post|put|delete/)) {
         args.push(data);
       }
+      args.push({params: params});
 
       rest[verb](args)
       .then(function(res) {
