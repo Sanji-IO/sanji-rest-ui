@@ -15,7 +15,7 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "NODE_ENV=production webpack --config webpack.build.js --display-modules",
     "commit": "git-cz",
-    "check-coverage": "istanbul check-coverage --statements 90 --branches 80 --functions 90 --lines 90",
+    "check-coverage": "istanbul check-coverage --statements 90 --branches 70 --functions 90 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "start": "NODE_ENV=development node server/dev-server.js",
     "test": "NODE_ENV=test karma start",
