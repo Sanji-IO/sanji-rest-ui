@@ -34,7 +34,7 @@ class RestProvider {
           });
         }
         else {
-          return makeRequest('post', uri, data, basePath);
+          return makeRequest('post', uri, data, options);
         }
       },
       put: (uri, data, files, options) => {
