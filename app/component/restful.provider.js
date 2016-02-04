@@ -54,13 +54,14 @@ class RestProvider {
           return makeRequest('put', uri, data, options);
         }
       },
-      delete: (uri, options) => {
-        return makeRequest('delete', uri, null, options);
+      delete: (uri, data, options) => {
+        return makeRequest('delete', uri, data, options);
       }
     };
 
     function makeRequest(verb, uri, data, options) {
       let defer = $q.defer();
+      let reqConfig = {};
       options = options || {};
       let base = options.basePath || config.basePath;
       let params = options.params || {};
@@ -68,10 +69,16 @@ class RestProvider {
 
       //start with the uri
       let args = [base + uri];
-      if (verb.match(/post|put|delete/)) {
+      if (verb.match(/post|put/)) {
         args.push(data);
       }
-      args.push({params: params});
+
+      if (verb.match(/delete/)) {
+        reqConfig.data = data
+      }
+
+      reqConfig.params = params;
+      args.push(reqConfig);
 
       rest[verb](args)
       .then(function(res) {
