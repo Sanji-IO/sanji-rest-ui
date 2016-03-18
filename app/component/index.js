@@ -1,3 +1,4 @@
+import angular from 'angular';
 import ngFileUpload from 'ng-file-upload';
 
 import HttpService from './http.service';

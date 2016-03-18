@@ -18,6 +18,7 @@ var config = {
     alias: {
       'angular-material.css': nodeRoot + '/angular-material/angular-material.css',
       'angular-material-icons.css': nodeRoot + '/angular-material-icons/angular-material-icons.css',
+      'angular-sanji-window.css': nodeRoot + '/angular-sanji-window/dist/angular-sanji-window.css',
       'toastr.scss': nodeRoot + '/toastr/toastr.scss',
       'svg-morpheus': nodeRoot + '/svg-morpheus/compile/unminified/svg-morpheus.js'
     },

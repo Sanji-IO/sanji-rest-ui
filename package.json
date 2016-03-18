@@ -3,7 +3,7 @@
   "author": "Zack Yang <zack9433@gmail.com> (https://github.com/zack9433)",
   "description": "sanji-rest-ui UI",
   "version": "0.0.0-semantic-released",
-  "main": "index",
+  "main": "dist/sanji-rest-ui.js",
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
@@ -21,6 +21,7 @@
     "start": "NODE_ENV=development node server/dev-server.js",
     "test": "NODE_ENV=test karma start",
     "test:once": "karma start",
+    "publish-latest": "publish-latest",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
@@ -28,14 +29,14 @@
     "angular-material": "~1.0.5",
     "angular-material-icons": "~0.6.0",
     "angular-mocks": "~1.5.0",
-    "angular-sanji-window": "Sanji-IO/angular-sanji-window#webpack-sanji-window",
+    "angular-sanji-window": "~2.1.0",
     "autoprefixer-loader": "~3.2.0",
     "babel-core": "~5.8.34",
     "babel-eslint": "~4.1.6",
     "babel-loader": "~5.3.3",
     "babel-runtime": "~5.8.34",
     "codecov.io": "~0.1.6",
-    "commitizen": "~2.5.0",
+    "commitizen": "~2.7.0",
     "css-loader": "~0.23.1",
     "cz-conventional-changelog": "~1.1.5",
     "es5-shim": "~4.4.1",
@@ -54,7 +55,7 @@
     "karma-coverage": "~0.5.3",
     "karma-es6-shim": "~0.2.0",
     "karma-mocha": "~0.2.1",
-    "karma-mocha-reporter": "~1.1.5",
+    "karma-mocha-reporter": "~2.0.0",
     "karma-phantomjs-launcher": "~1.0.0",
     "karma-sourcemap-loader": "~0.3.7",
     "karma-webpack": "~1.7.0",
@@ -63,15 +64,17 @@
     "node-bourbon": "~4.2.3",
     "node-sass": "~3.4.2",
     "phantomjs": "~2.1.3",
+    "publish-latest": "~1.1.2",
     "raw-loader": "~0.5.1",
     "sass-loader": "~3.1.2",
-    "semantic-release": "~4.3.5",
+    "semantic-release": "^4.3.5",
     "style-loader": "~0.13.0",
     "svg-morpheus": "alexk111/SVG-Morpheus#v0.1.8",
+    "toastr": "~2.1.2",
     "url-loader": "~0.5.7",
     "webpack": "~1.12.11",
     "webpack-dev-server": "~1.14.1",
-    "webpack-notifier": "~1.2.1"
+    "webpack-notifier": "~1.3.0"
   },
   "repository": {
     "type": "git",
@@ -84,10 +87,7 @@
     "sanji"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/Sanji/sanji-rest-ui",
-  "peerDependencies": {
-    "toastr": "^2.1.2"
-  },
+  "homepage": "https://github.com/Sanji-IO/sanji-rest-ui",
   "dependencies": {
     "angular": "~1.5.0",
     "ng-file-upload": "~12.0.1"
