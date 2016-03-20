@@ -12,6 +12,7 @@ class RestProvider {
   }
 
   $get($q, $log, $injector, Upload) {
+    'ngInject';
     let config = this.config;
     let rest = $injector.get(config.service);
 
