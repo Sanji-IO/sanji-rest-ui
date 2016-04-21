@@ -62,14 +62,13 @@ class RestProvider {
 
     function makeRequest(verb, uri, data, options) {
       let defer = $q.defer();
-      let reqConfig = {};
-      options = options || {};
-      let base = options.basePath || config.basePath;
-      let params = options.params || {};
-      verb = verb.toLowerCase();
-
+      let reqConfig = options || {};
+      let base = reqConfig.basePath || config.basePath;
       //start with the uri
       let args = [base + uri];
+
+      verb = verb.toLowerCase();
+
       if (verb.match(/post|put/)) {
         args.push(data);
       }
@@ -81,7 +80,6 @@ class RestProvider {
         };
       }
 
-      reqConfig.params = params;
       args.push(reqConfig);
 
       rest[verb](args)
