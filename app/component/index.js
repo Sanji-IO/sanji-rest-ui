@@ -7,4 +7,4 @@ import RestHelper from './restful.provider';
 let app = angular.module('sanji.rest', [ngFileUpload]);
 app.service('http', HttpService);
 app.provider('rest', RestHelper);
-export default app = app.name
+export default app = app.name;
