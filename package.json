@@ -2,7 +2,7 @@
   "name": "sanji-rest-ui",
   "author": "Zack Yang <zack9433@gmail.com> (https://github.com/zack9433)",
   "description": "sanji-rest-ui UI",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "main": "dist/sanji-rest-ui.js",
   "config": {
     "ghooks": {
@@ -38,8 +38,7 @@
     "babel-loader": "^6.0.0",
     "babel-plugin-__coverage__": "^11.0.0",
     "babel-plugin-lodash": "^3.2.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
-    "babel-preset-es2015-webpack": "^6.4.1",
+    "babel-preset-es2015": "~6.9.0",
     "codecov.io": "^0.1.6",
     "commitizen": "^2.8.0",
     "css-loader": "~0.23.1",

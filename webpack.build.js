@@ -38,6 +38,9 @@ config.module.loaders = [
   }
 ].concat(config.module.loaders);
 
+config.module.postLoaders = [
+  {test: /\.js$/, loader: 'ng-annotate', exclude: /(node_modules)/}
+];
 config.postcss = [ autoprefixer({ browsers: ['last 2 versions'] }) ];
 
 config.plugins.push(
