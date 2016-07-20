@@ -5,11 +5,11 @@
   "version": "0.0.0-semantic-released",
   "main": "dist/sanji-rest-ui.js",
   "config": {
-    "commitizen": {
+    "ghooks": {
       "pre-commit": "opt --in pre-commit --exec 'npm run validate'"
     },
-    "ghooks": {
-      "pre-commit": "npm run test:once && npm run check-coverage"
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
     }
   },
   "scripts": {
