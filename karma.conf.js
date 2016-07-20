@@ -7,13 +7,13 @@ var test = process.env.NODE_ENV === 'test';
 module.exports = function(config) {
   config.set({
     plugins: [
-      'karma-phantomjs-launcher',
-      'karma-chai-plugins',
+      'karma-chrome-launcher',
       'karma-mocha',
+      'karma-chai-plugins',
       'karma-sourcemap-loader',
       'karma-webpack',
       'karma-coverage',
-      'karma-mocha-reporter'
+      'karma-spec-reporter'
     ],
 
     autoWatch: test,
@@ -51,7 +51,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'coverage'],
+    reporters: ['spec', 'coverage'],
 
 
     coverageReporter: {
@@ -60,17 +60,6 @@ module.exports = function(config) {
         {type: 'json', dir: 'coverage/', subdir: '.'},
         {type: 'text-summary'}
       ]
-    },
-
-
-    // Mocha reporter options
-    mochaReporter: {
-      colors: {
-        success: 'blue',
-        info: 'bgGreen',
-        warning: 'cyan',
-        error: 'bgRed'
-      }
     },
 
 
@@ -89,11 +78,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: !test
   });
-}
+};

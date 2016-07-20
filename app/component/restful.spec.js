@@ -1,3 +1,5 @@
+import angular from 'angular';
+import 'angular-mocks';
 import ngFileUpload from 'ng-file-upload';
 
 import RestProvider from './restful.provider' ;

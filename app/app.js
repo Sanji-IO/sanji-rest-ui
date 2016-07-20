@@ -4,7 +4,7 @@ import 'angular-sanji-window.css';
 import './app.scss';
 import angular from 'angular';
 import sjWindow from 'angular-sanji-window';
-import component from './component';
+import {sjRest} from './component';
 
 class EthernetController {
   constructor(...injects) {
@@ -25,8 +25,12 @@ class EthernetController {
 }
 EthernetController.$inject = ['rest'];
 
-let app = angular.module('webapp', [component, sjWindow]);
+const app = angular.module('webapp', [sjRest, sjWindow]);
 app.config(restProvider => {
   restProvider.configure({basePath: 'http://private-d8e84-sanjigeneric.apiary-mock.com'});
 });
 app.controller('EthernetController', EthernetController);
+
+angular.element(document).ready(() => {
+  angular.bootstrap(document.body, ['webapp']);
+});
