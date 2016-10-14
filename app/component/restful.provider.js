@@ -24,15 +24,16 @@ class RestProvider {
       post: (uri, data, files, options) => {
         if ('http' === config.service && Array.isArray(files)) {
           options = options || {};
-          let base = options.basePath || config.basePath;
-          return Upload.upload({
+          const base = options.basePath || config.basePath;
+          let setting = {
             url: base + uri,
             method: 'POST',
             data: {
               files: files,
               otherInfo: data
             }
-          });
+          };
+          return Upload.upload(Object.assign(setting, options));
         }
         else {
           return makeRequest('post', uri, data, options);
@@ -41,15 +42,16 @@ class RestProvider {
       put: (uri, data, files, options) => {
         if ('http' === config.service && Array.isArray(files)) {
           options = options || {};
-          let base = options.basePath || config.basePath;
-          return Upload.upload({
+          const base = options.basePath || config.basePath;
+          let setting = {
             url: base + uri,
             method: 'PUT',
             data: {
               files: files,
               otherInfo: data
             }
-          });
+          };
+          return Upload.upload(Object.assign(setting, options));
         }
         else {
           return makeRequest('put', uri, data, options);
