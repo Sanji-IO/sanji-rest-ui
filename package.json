@@ -2,7 +2,7 @@
   "name": "sanji-rest-ui",
   "author": "Zack Yang <zack9433@gmail.com> (https://github.com/zack9433)",
   "description": "sanji-rest-ui UI",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "main": "dist/sanji-rest-ui.js",
   "config": {
     "ghooks": {
@@ -53,6 +53,6 @@
   "homepage": "https://github.com/Sanji-IO/sanji-rest-ui",
   "dependencies": {
     "angular": "~1.5.0",
-    "ng-file-upload": "~12.0.1"
+    "ng-file-upload": "~12.2.0"
   }
 }
