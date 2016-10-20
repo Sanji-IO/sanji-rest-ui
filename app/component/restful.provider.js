@@ -29,7 +29,7 @@ class RestProvider {
             url: base + uri,
             method: 'POST',
             data: {
-              files: files
+              file: files[0]
             }
           };
           if (data) {
@@ -49,7 +49,7 @@ class RestProvider {
             url: base + uri,
             method: 'PUT',
             data: {
-              files: files
+              file: files[0]
             }
           };
           if (data) {
