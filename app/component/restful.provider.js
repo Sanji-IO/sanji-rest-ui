@@ -29,10 +29,12 @@ class RestProvider {
             url: base + uri,
             method: 'POST',
             data: {
-              files: files,
-              otherInfo: data
+              files: files
             }
           };
+          if (data) {
+            setting.data.jsonData = JSON.stringify(data);
+          }
           return Upload.upload(Object.assign(setting, options));
         }
         else {
@@ -47,10 +49,12 @@ class RestProvider {
             url: base + uri,
             method: 'PUT',
             data: {
-              files: files,
-              otherInfo: data
+              files: files
             }
           };
+          if (data) {
+            setting.data.jsonData = JSON.stringify(data);
+          }
           return Upload.upload(Object.assign(setting, options));
         }
         else {
