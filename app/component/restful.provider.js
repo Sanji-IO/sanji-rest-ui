@@ -33,7 +33,7 @@ class RestProvider {
             }
           };
           if (data) {
-            setting.data.jsonData = JSON.stringify(data);
+            setting.data = Object.assign({}, setting.data, data);
           }
           return Upload.upload(Object.assign(setting, options));
         }
@@ -53,7 +53,7 @@ class RestProvider {
             }
           };
           if (data) {
-            setting.data.jsonData = JSON.stringify(data);
+            setting.data = Object.assign({}, setting.data, data);
           }
           return Upload.upload(Object.assign(setting, options));
         }
