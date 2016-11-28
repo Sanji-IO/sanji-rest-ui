@@ -27,19 +27,18 @@ config.externals = {
 };
 
 config.module.rules = [
-  {test: /\.js$/, loader: 'ng-annotate', exclude: /(node_modules)/, enforce: 'post'},
+  {test: /\.js$/, loader: 'ng-annotate-loader', exclude: /(node_modules)/, enforce: 'post'},
   {
     test: /\.scss$/,
     loader: ExtractTextPlugin.extract({
       notExtractLoader: 'style-loader',
-      loader: 'css!postcss!sass?includePaths[]=' + bourbon
+      loader: 'css-loader!postcss-loader!sass-loader?includePaths[]=' + bourbon
     })
   }
 ].concat(config.module.rules);
 
 config.plugins.push(
   new ExtractTextPlugin('sanji-rest-ui.css'),
-  new webpack.optimize.DedupePlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false,
