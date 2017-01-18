@@ -25,16 +25,12 @@ class RestProvider {
         if ('http' === config.service && Array.isArray(files)) {
           options = options || {};
           const base = options.basePath || config.basePath;
-          let setting = {
+          const setting = {
             url: base + uri,
             method: 'POST',
-            data: {
-              file: files[0]
-            }
+            data: {}
           };
-          if (data) {
-            setting.data = Object.assign({}, setting.data, data);
-          }
+          transformUploadSetting(setting, data, files);
           return Upload.upload(Object.assign(setting, options));
         }
         else {
@@ -45,16 +41,12 @@ class RestProvider {
         if ('http' === config.service && Array.isArray(files)) {
           options = options || {};
           const base = options.basePath || config.basePath;
-          let setting = {
+          const setting = {
             url: base + uri,
             method: 'PUT',
-            data: {
-              file: files[0]
-            }
+            data: {}
           };
-          if (data) {
-            setting.data = Object.assign({}, setting.data, data);
-          }
+          transformUploadSetting(setting, data, files);
           return Upload.upload(Object.assign(setting, options));
         }
         else {
@@ -65,6 +57,21 @@ class RestProvider {
         return makeRequest('delete', uri, data, options);
       }
     };
+
+    function transformUploadSetting(setting, data, files) {
+      if (files[0] instanceof File) {
+        (files.length === 1) ? setting.data.file = files[0] : setting.data.files = files;
+      } else {
+        files.forEach(item => {
+          if (item.key) {
+            setting.data[item.key] = item.file;
+          }
+        });
+      }
+      if (data) {
+        setting.data = Object.assign({}, setting.data, data);
+      }
+    }
 
     function makeRequest(verb, uri, data, options) {
       let defer = $q.defer();
