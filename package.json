@@ -2,7 +2,7 @@
   "name": "sanji-rest-ui",
   "author": "Zack Yang <zack9433@gmail.com> (https://github.com/zack9433)",
   "description": "sanji-rest-ui UI",
-  "version": "1.3.14",
+  "version": "1.4.0",
   "main": "dist/sanji-rest-ui.js",
   "config": {
     "ghooks": {
@@ -19,7 +19,7 @@
     "prebuild": "rimraf dist && mkdir dist",
     "build": "cross-env NODE_ENV=production webpack --config webpack.build.js --display-modules",
     "commit": "git-cz",
-    "check-coverage": "istanbul check-coverage --statements 70 --branches 50 --functions 70 --lines 70",
+    "check-coverage": "istanbul check-coverage --statements 60 --branches 40 --functions 70 --lines 70",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "start": "cross-env NODE_ENV=development node server/dev-server.js",
     "postpublish": "publish-latest",
