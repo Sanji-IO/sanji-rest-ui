@@ -88,9 +88,11 @@ class RestProvider {
 
       if (verb.match(/delete/)) {
         reqConfig.data = data;
-        reqConfig.headers = {
-          'Content-Type': 'application/json'
-        };
+        if (reqConfig.headers) {
+          reqConfig.headers['Content-Type'] = 'application/json';
+        } else {
+          reqConfig.headers = { 'Content-Type': 'application/json' };
+        }
       }
 
       args.push(reqConfig);
