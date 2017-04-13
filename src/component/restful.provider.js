@@ -21,9 +21,8 @@ class RestProvider {
       get: (uri, options) => {
         return makeRequest('get', uri, null, options);
       },
-      post: (uri, data, files, options) => {
+      post: (uri, data, files, options = {}) => {
         if ('http' === config.service && Array.isArray(files)) {
-          options = options || {};
           const base = options.basePath || config.basePath;
           const setting = {
             url: base + uri,
@@ -32,12 +31,11 @@ class RestProvider {
           };
           transformUploadSetting(setting, data, files);
           return Upload.upload(Object.assign(setting, options));
-        }
-        else {
+        } else {
           return makeRequest('post', uri, data, options);
         }
       },
-      put: (uri, data, files, options) => {
+      put: (uri, data, files, options = {}) => {
         if ('http' === config.service && Array.isArray(files)) {
           options = options || {};
           const base = options.basePath || config.basePath;
@@ -48,8 +46,7 @@ class RestProvider {
           };
           transformUploadSetting(setting, data, files);
           return Upload.upload(Object.assign(setting, options));
-        }
-        else {
+        } else {
           return makeRequest('put', uri, data, options);
         }
       },
@@ -60,7 +57,7 @@ class RestProvider {
 
     function transformUploadSetting(setting, data, files) {
       if (files[0] instanceof File) {
-        (files.length === 1) ? setting.data.file = files[0] : setting.data.files = files;
+        files.length === 1 ? (setting.data.file = files[0]) : (setting.data.files = files);
       } else {
         files.forEach(item => {
           if (item.key) {
@@ -73,9 +70,9 @@ class RestProvider {
       }
     }
 
-    function makeRequest(verb, uri, data, options) {
+    function makeRequest(verb, uri, data, options = {}) {
       let defer = $q.defer();
-      let reqConfig = options || {};
+      let reqConfig = JSON.parse(JSON.stringify(options));
       let base = reqConfig.basePath || config.basePath;
       //start with the uri
       let args = [base + uri];
@@ -97,13 +94,14 @@ class RestProvider {
 
       args.push(reqConfig);
 
-      rest[verb](args)
-      .then(function(res) {
-        defer.resolve(res);
-      })
-      .catch(function(res) {
-        defer.reject(res);
-      });
+      rest
+        [verb](args)
+        .then(function(res) {
+          defer.resolve(res);
+        })
+        .catch(function(res) {
+          defer.reject(res);
+        });
 
       return defer.promise;
     }
