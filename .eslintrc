@@ -19,6 +19,7 @@
     "__BASE_PATH__": true
   },
   "rules": {
+    "no-unexpected-multiline": "off",
     "indent": [
       "error",
       2,
