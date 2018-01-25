@@ -1,7 +1,7 @@
 const $inject = ['$http'];
 class HttpService {
   constructor(...injects) {
-    HttpService.$inject.forEach((item, index) => this[item] = injects[index]);
+    HttpService.$inject.forEach((item, index) => (this[item] = injects[index]));
   }
 
   get(httpArgs) {

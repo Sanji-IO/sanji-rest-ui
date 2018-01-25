@@ -2,42 +2,45 @@
   "name": "sanji-rest-ui",
   "author": "Zack Yang <zack9433@gmail.com> (https://github.com/zack9433)",
   "description": "sanji-rest-ui UI",
-  "version": "0.0.0-semantic-released",
+  "version": "0.0.0-development",
   "main": "dist/sanji-rest-ui.js",
   "config": {
     "ghooks": {
-      "pre-commit": "opt --in pre-commit --exec 'npm run validate'"
+      "pre-commit": "opt --in pre-commit --exec 'yarn validate'"
     },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
   },
   "scripts": {
-    "validate": "npm run test:once && npm run check-coverage",
+    "validate": "yarn test:once && yarn check-coverage",
     "test": "cross-env NODE_ENV=test BABEL_ENV=test karma start",
     "test:once": "cross-env BABEL_ENV=test karma start",
     "prebuild": "rimraf dist && mkdir dist",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.build.js --display-modules",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.build.js",
     "commit": "git-cz",
     "check-coverage": "istanbul check-coverage --statements 60 --branches 40 --functions 70 --lines 70",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "start": "cross-env NODE_ENV=development node server/dev-server.js",
-    "postpublish": "publish-latest",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "prepublishOnly": "yarn build",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "angular-animate": "~1.5.0",
-    "angular-aria": "~1.5.0",
-    "angular-material": "~1.1.0",
-    "angular-material-icons": "~0.7.0",
-    "angular-mocks": "~1.5.0",
-    "angular-sanji-window": "~2.1.12",
+    "angular": "~1.6.8",
+    "ng-file-upload": "^12.2.13",
+    "angular-animate": "~1.6.8",
+    "angular-aria": "~1.6.8",
+    "angular-material": "~1.1.6",
+    "angular-material-icons": "~0.7.1",
+    "angular-mocks": "~1.6.8",
+    "angular-sanji-window": "~2.2.0",
     "codecov.io": "^0.1.6",
-    "publish-latest": "~1.1.2",
-    "sanji-common-devs-ui": "~1.0.4",
-    "semantic-release": "^6.3.2",
-    "svg-morpheus": "alexk111/SVG-Morpheus#v0.1.8",
-    "toastr": "~2.1.2"
+    "sanji-common-devs-ui": "^7.0.0",
+    "svg-morpheus": "^0.3.0",
+    "toastr": "~2.1.4",
+    "travis-deploy-once": "^4.3.3",
+    "semantic-release": "^12.2.4"
   },
   "repository": {
     "type": "git",
@@ -46,13 +49,11 @@
   "bugs": {
     "url": "https://github.com/Sanji-IO/sanji-rest-ui/issues"
   },
-  "keywords": [
-    "sanji"
-  ],
+  "keywords": ["sanji"],
   "license": "MIT",
   "homepage": "https://github.com/Sanji-IO/sanji-rest-ui",
-  "dependencies": {
-    "angular": "~1.5.0",
-    "ng-file-upload": "~12.2.0"
+  "peerDependencies": {
+    "angular": ">=1.4 <1.7",
+    "ng-file-upload": "^12.2.13"
   }
 }

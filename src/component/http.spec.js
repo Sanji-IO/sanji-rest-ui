@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
 
-import HttpService from './http.service' ;
+import HttpService from './http.service';
 
 let $http;
 let httpService;

@@ -1,7 +1,7 @@
 const $inject = [];
 class RestProvider {
   constructor(...injects) {
-    RestProvider.$inject.forEach((item, index) => this[item] = injects[index]);
+    RestProvider.$inject.forEach((item, index) => (this[item] = injects[index]));
 
     this.config = {
       service: 'http',
@@ -22,7 +22,7 @@ class RestProvider {
         return makeRequest('get', uri, null, options);
       },
       post: (uri, data, files, options = {}) => {
-        if ('http' === config.service && Array.isArray(files)) {
+        if (config.service === 'http' && Array.isArray(files)) {
           const base = options.basePath || config.basePath;
           const setting = {
             url: base + uri,
@@ -36,7 +36,7 @@ class RestProvider {
         }
       },
       put: (uri, data, files, options = {}) => {
-        if ('http' === config.service && Array.isArray(files)) {
+        if (config.service === 'http' && Array.isArray(files)) {
           options = options || {};
           const base = options.basePath || config.basePath;
           const setting = {
@@ -94,12 +94,11 @@ class RestProvider {
 
       args.push(reqConfig);
 
-      rest
-        [verb](args)
-        .then(function(res) {
+      rest[verb](args)
+        .then(res => {
           defer.resolve(res);
         })
-        .catch(function(res) {
+        .catch(res => {
           defer.reject(res);
         });
 
